@@ -13,7 +13,7 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
 # FILL IN START
 
 # Assign a port number
-serverPort = 56400 ##
+serverPort = 56400##
 
 # Bind the socket to server address and server port
 serverSocket.bind(('',serverPort)) ##
@@ -41,24 +41,26 @@ while True:
 		# Extract the path of the requested object from the message
 		# The path is the second part of HTTP header, identified by [1]
 		filepath = message.split()[1]
+
 		
 		# Because the extracted path of the HTTP request includes 
 		# a character '\', we read the path from the second character 
 		f = open(filepath[1:],'r')
 		
 		# Read the file "f" and store the entire content of the requested file in a temporary buffer
-		outputdata = # FILL IN START		# FILL IN END
+		outputdata = f.readlines()# FILL IN START		# FILL IN END
+		print(outputdata)
 		
 		# Send the HTTP response header line to the connection socket
 		# Format: "HTTP/1.1 *code-for-successful-request*\r\n\r\n"
-		# FILL IN START		
-		connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n")##
+		# FILL IN START
+		connectionSocket.send(b"HTTP/1.1 200 OK\r\n\r\n")##
  		# FILL IN END
  		
 		# Send the content of the requested file to the connection socket
 		for i in range(0, len(outputdata)):  
-			connectionSocket.send(outputdata[i])
-		connectionSocket.send("\r\n")
+			connectionSocket.send(outputdata[i].encode())
+		connectionSocket.send(b"\r\n")
 		
 		# Close the client connection socket
 		connectionSocket.close()
@@ -67,14 +69,14 @@ while True:
 		# Send HTTP response message for file not found
 		# Same format as above, but with code for "Not Found" (see outputdata variable)
 		# FILL IN START		
-		connectionSocket.send("HTTP/1.1 404 NOT FOUND\r\n\r\n")##
+		connectionSocket.send(b"HTTP/1.1 404 NOT FOUND\r\n\r\n")##
  		# FILL IN END
-		connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n")
+		connectionSocket.send(b"<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n")
 		
 		# Close the client connection socket
 		# FILL IN START		
 		connectionSocket.close()##
- 		# FILL IN END
+		# FILL IN END
 
-serverSocket.close()  
+serverSocket.close()
 
