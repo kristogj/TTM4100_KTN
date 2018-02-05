@@ -27,7 +27,7 @@ ptime = 0
 while ptime < 10: 
     ptime += 1
     # Format the message to be sent as in the Lab description
-    ntime = time.time()
+    ntime = time.asctime()
     s = "Ping " + str(ptime) + " " + str(ntime)
     data = s.encode()
 
