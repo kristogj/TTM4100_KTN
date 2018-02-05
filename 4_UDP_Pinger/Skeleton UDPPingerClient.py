@@ -1,7 +1,6 @@
 # This skeleton is valid for both Python 2.7 and Python 3.
 # You should be aware of your additional code for compatibility of the Python version of your choice.
 
-import time
 from socket import *
 import time
 
