@@ -3,10 +3,12 @@
 
 from socket import *
 import time
+from sys import argv
 
-# Get the server hostname and port as command line arguments                    
-host = input("Host: ")
-port = int(input("Port: "))
+# Get the server hostname and port as command line arguments
+address = (argv[1],int(argv[2]))
+host = address[0]
+port = address[1]
 timeout = 1 # in seconds
  
 # Create UDP client socket
